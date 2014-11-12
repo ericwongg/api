@@ -36,7 +36,7 @@ def condition(city,state):
         tag = 'safe'
 
     #tumblr stuff
-    url="http://api.tumblr.com/v2/tagged?tag=%s&api_key=y3voJNR7GK385uXtaTFUGhF1Nig4qzMFvVGMWvsMWDEERL85qv"
+    url="http://api.tumblr.com/v2/tagged?tag=%s&api_key=6qjbDDaQ4vUogvpFIZ2UoaHuo6ykn1vMpjRYOdYOPCQI6dBw4K"
     url = url%tag
     request = urllib2.urlopen(url)
     resultstring = request.read()
