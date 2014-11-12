@@ -41,7 +41,7 @@ def condition(city,state):
     request = urllib2.urlopen(url)
     resultstring = request.read()
     result = json.loads(resultstring)
-    pictures = result['response']
+    pictures = result['response']['photos'][0]['original_size']['url']
     request.close()
 
     return render_template("condition.html",tag=tag,pictures=pictures)
