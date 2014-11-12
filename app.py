@@ -18,17 +18,17 @@ alert = {'HUR':'Hurricane', 'TOR':'Tornado', 'TOW':'Tornado', 'WRN':'Thunderstor
 def condition(city,state):
 
     #weather stuff
-    try:
-        url="http://api.wunderground.com/api/e67a9f7ffa697198/alerts/q/%s/%s.json"
-        url = url%(state, city)
-        request = urllib2.urlopen(url)
-        resultstring = request.read()
-        result = json.loads(resultstring)
+    url="http://api.wunderground.com/api/e67a9f7ffa697198/alerts/q/%s/%s.json"
+    url = url%(state, city)
+    request = urllib2.urlopen(url)
+    resultstring = request.read()
+    result = json.loads(resultstring)
+    if result['errors']['description']=="No cities match your search query":
+        return render_template("error.html")
+    else:
         #getting the alert type
         atype = result['alerts']['type']
         request.close()
-    except:
-        return render_template("error.html")
 
     if atype in alerts:
         tag = alert['atype']
