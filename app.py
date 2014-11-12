@@ -23,7 +23,7 @@ def condition(city,state):
     request = urllib2.urlopen(url)
     resultstring = request.read()
     result = json.loads(resultstring)
-    if result['errors']['description']=="No cities match your search query":
+    if 'errors' in result:
         return render_template("error.html")
     else:
         #getting the alert type
