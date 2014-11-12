@@ -1,17 +1,23 @@
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, url_for, flash
 import json, urllib2
 
 app=Flask(__name__)
+app.secret_key = 'dont_tell'
 
-@app.route("/")
+@app.route("/", methods = ['GET','POST'])
 def index():
-    button = request.args.get("b",None)
-    if button==None:
+    if request.method == 'GET':
         return render_template("home.html")
     else:
-        city = request.args.get("city",None)
-        state = request.args.get("state",None)
-        return condition(city,state)
+        button = request.form['b']
+        city = request.form['city']
+        state = request.form['state']
+        if city == '' or state == '':
+            flash('You must enter in both a city and a state!')
+            return redirect(url_for('index'))
+        else:
+            return condition(city,state)
+
 
 alert = {'HUR':'Hurricane', 'TOR':'Tornado', 'TOW':'Tornado', 'WRN':'Thunderstorm', 'SEW':'Thunderstorm', 'WIN':'Winter Weather', 'FLO':'Flood', 'WAT':'Flood', 'WND':'Windy', 'SVR':'Severe Weather', 'HEA':'Heat', 'FOG':'Fog', 'SPE':'Special Weather', 'FIR':'Fire', 'VOL':'Volcanoe', 'HWW':'Hurricane'}
 @app.route("/condition")
@@ -27,7 +33,10 @@ def condition(city,state):
         return render_template("error.html")
     else:
         #getting the alert type
-        atype = result['alerts'][0]['type']
+        try:
+            atype = result['alerts'][0]['type']
+        except:
+            return render_template("error.html")
         request.close()
 
     if atype in alert:
@@ -55,4 +64,3 @@ def condition(city,state):
 if __name__=="__main__":
     app.debug=True
     app.run()
-    #app.run(host="0.0.0.0",port=8000)
