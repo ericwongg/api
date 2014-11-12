@@ -30,7 +30,7 @@ def condition(city,state):
     except:
         return render_template("error.html")
 
-    if atype.in(alert):
+    if atype in alerts.keys():
         tag = alert['atype']
     else:
         tag = 'safe'
