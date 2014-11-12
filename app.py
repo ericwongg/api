@@ -31,7 +31,7 @@ def condition(city,state):
         request.close()
 
     if atype in alert:
-        tag = alert['atype']
+        tag = alert[atype]
     else:
         tag = 'safe'
 
