@@ -2,42 +2,20 @@
   <title>Home Page</title>
   <head>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
-    <style>
-      p{
-      font-family: Sans-Serif;
-      margin: 50px;
-      }
-      p.normal{
-      font-size: 1.5em
-      }
-      p.large{
-      font-size: 2.5em
-      }
-
-      body{
-      background-color: #ADFFAD
-      }
-    </style>
   </head>
   <body>
-    <br>
-    <br>
     <center>
       <form class = "pure-form pure-form-stacked">
 	<fieldset>
-	  <p class = "large">
 	  <legend>Weather alerts in your area!(US cities only)</legend>
-	  </p>
-	  <p class = "normal">
+
 	  <label for = "city">City (ex. Brooklyn, San Francisco)</label>
 	  <input id = "city" type = "city" placeholder = "City">
 
 	  <label for = "state">State (ex. NY, CA)</label>
 	  <input id = "state" type = "state" placeholder = "State">
-	  <br>
-	  <br>
-	  <button type = "submit" name = "b" class = "pure-button pure-button-primary">Submit</button>
-	  </p>
+	  
+	  <button type = "submit" name = "b" class = "pure-button pure-button-primary">b</button>
 	</fieldset>
       </form>
     </center>  
