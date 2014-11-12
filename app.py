@@ -37,11 +37,17 @@ def condition(city,state):
 
     #tumblr stuff
     url="http://api.tumblr.com/v2/tagged?tag=%s&api_key=6qjbDDaQ4vUogvpFIZ2UoaHuo6ykn1vMpjRYOdYOPCQI6dBw4K"
-    url = url%tag
+    url = url%(tag)
     request = urllib2.urlopen(url)
     resultstring = request.read()
     result = json.loads(resultstring)
-    pictures = result['response']['photos'][0]['original_size']['url']
+    #pictures = result['response']
+    pictures = []
+    for item in result['response']:
+        try:
+            pictures.append(item['photos'][0]['original_size']['url'])
+        except:
+            pass
     request.close()
 
     return render_template("condition.html",tag=tag,pictures=pictures)
