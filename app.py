@@ -27,7 +27,7 @@ def condition(city,state):
         return render_template("error.html")
     else:
         #getting the alert type
-        atype = result['alerts']['type']
+        atype = result['alerts'][0]['type']
         request.close()
 
     if atype in alerts:
