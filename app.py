@@ -44,7 +44,7 @@ def condition(city,state):
     pictures = result['response']
     request.close()
 
-    return render_template("condition.html",tag,pictures)
+    return render_template("condition.html",tag=tag,pictures=pictures)
 
 if __name__=="__main__":
     app.debug=True
