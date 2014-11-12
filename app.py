@@ -20,7 +20,7 @@ def condition(city,state):
     #weather stuff
     try:
         url="http://api.wunderground.com/api/e67a9f7ffa697198/alerts/q/%s/%s.json"
-        url = url%(city, state)
+        url = url%(state, city)
         request = urllib2.urlopen(url)
         resultstring = request.read()
         result = json.loads(resultstring)
