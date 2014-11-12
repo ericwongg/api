@@ -10,7 +10,7 @@
       <p>{{tag}}</p>
       <br>
       <br>
-      {% for i in range(pictures) %}
+      {% for i in range(pictures|length) %}
       <img src = {{pictures[i]}}>
       {% endfor %}
     </center>
