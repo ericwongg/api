@@ -29,6 +29,7 @@ def condition(city,state):
     request = urllib2.urlopen(url)
     resultstring = request.read()
     result = json.loads(resultstring)
+    print result
     if 'errors' in result:
         return render_template("error.html")
     else:
@@ -36,13 +37,13 @@ def condition(city,state):
         try:
             atype = result['alerts'][0]['type']
         except:
-            return render_template("error.html")
+            atype = "NONE"
         request.close()
 
     if atype in alert:
         tag = alert[atype]
     else:
-        tag = 'safe'
+        tag = 'sunshine'
 
     #tumblr stuff
     url="http://api.tumblr.com/v2/tagged?tag=%s&api_key=6qjbDDaQ4vUogvpFIZ2UoaHuo6ykn1vMpjRYOdYOPCQI6dBw4K"
