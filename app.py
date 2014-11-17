@@ -43,7 +43,14 @@ def condition(city,state):
     if atype in alert:
         tag = alert[atype]
     else:
-        tag = 'sunshine'
+        #get forecast
+        url="http://api.wunderground.com/api/e67a9f7ffa697198/forecast/q/%s/%s.json"
+        url = url%(state,city)
+        request = urllib2.urlopen(url)
+        resultstring = request.read()
+        result = json.load(resultstring)
+        tag = result['simpleforecast']['forecastday'][0]['conditions']
+        #we can make this even more brolic if we do scrap more data like tempertaure (lows and highs), wind, humidity
 
     #tumblr stuff
     url="http://api.tumblr.com/v2/tagged?tag=%s&api_key=6qjbDDaQ4vUogvpFIZ2UoaHuo6ykn1vMpjRYOdYOPCQI6dBw4K"
