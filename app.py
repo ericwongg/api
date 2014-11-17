@@ -49,7 +49,11 @@ def condition(city,state):
         request = urllib2.urlopen(url)
         resultstring = request.read()
         result = json.loads(resultstring)
-        tag = result['forecast']['simpleforecast']['forecastday'][0]['conditions']
+        try:
+            tag = result['forecast']['simpleforecast']['forecastday'][0]['conditions']
+        except:
+            flash('Invalid city and state')
+            return redirect(url_for('index'))
         #we can make this even more brolic if we do scrap more data like tempertaure (lows and highs), wind, humidity
 
     #tumblr stuff
