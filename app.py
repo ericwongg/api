@@ -48,8 +48,8 @@ def condition(city,state):
         url = url%(state,city)
         request = urllib2.urlopen(url)
         resultstring = request.read()
-        result = json.load(resultstring)
-        tag = result['simpleforecast']['forecastday'][0]['conditions']
+        result = json.loads(resultstring)
+        tag = result['forecast']['simpleforecast']['forecastday'][0]['conditions']
         #we can make this even more brolic if we do scrap more data like tempertaure (lows and highs), wind, humidity
 
     #tumblr stuff
