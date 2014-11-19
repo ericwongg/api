@@ -16,20 +16,21 @@ def index():
             flash('You must enter in both a city and a state!')
             return redirect(url_for('index'))
         else:
+            res = ""
+            c = c.title()
+            s = s.upper()
             return redirect(url_for('condition', city = c, state = s))#condition(city,state)
 
 
 alert = {'HUR':'Hurricane', 'TOR':'Tornado', 'TOW':'Tornado', 'WRN':'Thunderstorm', 'SEW':'Thunderstorm', 'WIN':'Winter Weather', 'FLO':'Flood', 'WAT':'Flood', 'WND':'Windy', 'SVR':'Severe Weather', 'HEA':'Heat', 'FOG':'Fog', 'SPE':'Special Weather', 'FIR':'Fire', 'VOL':'Volcanoe', 'HWW':'Hurricane'}
 @app.route("/condition/<state>/<city>")
 def condition(city,state):
-
     #weather stuff
     url="http://api.wunderground.com/api/e67a9f7ffa697198/alerts/q/%s/%s.json"
     url = url%(state, city)
     request = urllib2.urlopen(url)
     resultstring = request.read()
     result = json.loads(resultstring)
-    print result
     if 'errors' in result:
         return render_template("error.html")
     else:
@@ -45,7 +46,7 @@ def condition(city,state):
     else:
         #get forecast
         url="http://api.wunderground.com/api/e67a9f7ffa697198/forecast/q/%s/%s.json"
-        url = url%(state,city)
+        url = url%(state, city)
         request = urllib2.urlopen(url)
         resultstring = request.read()
         result = json.loads(resultstring)
