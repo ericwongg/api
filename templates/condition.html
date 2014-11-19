@@ -1,5 +1,5 @@
 <html>
-  <title>Weather Alert</title>
+  <title>Weather</title>
   <head>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css">
     <style>
@@ -21,14 +21,16 @@
   </head>
   <body>
     <center>
-      <p class = "large"><h1>Weather Alerts</h1></p>
-      <p class = "normal">{{tag}}
+      <p class = "large"><h1>Weather</h1></p>
+      <p class = "normal">{{tag}}	
       <br>
       <br>
       {% for item in pictures %}
       <img src = {{item}} width = "500" height = "300">
       {% endfor %}
       </p>
+      <a href = "/" class = "pure-button">Go back</a>
+      <br>
     </center>
   </body>
 </html>

@@ -1,11 +1,13 @@
 <!doctype html>
 {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      {{ message }}
-    {% endfor %}
-    </ul>
-  {% endif %}
+{% if messages %}
+<ul class=flashes>
+  <font color = "red">
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
+  </font>
+</ul>
+{% endif %}
 {% endwith %}
 {% block body %}{% endblock %}

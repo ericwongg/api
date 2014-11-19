@@ -10,17 +10,17 @@ def index():
         return render_template("home.html")
     else:
         button = request.form['b']
-        city = request.form['city']
-        state = request.form['state']
-        if city == '' or state == '':
+        c = request.form['city']
+        s = request.form['state']
+        if c == '' or s == '':
             flash('You must enter in both a city and a state!')
             return redirect(url_for('index'))
         else:
-            return condition(city,state)
+            return redirect(url_for('condition', city = c, state = s))#condition(city,state)
 
 
 alert = {'HUR':'Hurricane', 'TOR':'Tornado', 'TOW':'Tornado', 'WRN':'Thunderstorm', 'SEW':'Thunderstorm', 'WIN':'Winter Weather', 'FLO':'Flood', 'WAT':'Flood', 'WND':'Windy', 'SVR':'Severe Weather', 'HEA':'Heat', 'FOG':'Fog', 'SPE':'Special Weather', 'FIR':'Fire', 'VOL':'Volcanoe', 'HWW':'Hurricane'}
-@app.route("/condition")
+@app.route("/condition/<state>/<city>")
 def condition(city,state):
 
     #weather stuff
