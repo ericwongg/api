@@ -26,11 +26,13 @@ alert = {'HUR':'Hurricane', 'TOR':'Tornado', 'TOW':'Tornado', 'WRN':'Thunderstor
 @app.route("/condition/<state>/<city>")
 def condition(city,state):
     #weather stuff
+    city = city.replace(" ","_")
     url="http://api.wunderground.com/api/e67a9f7ffa697198/alerts/q/%s/%s.json"
     url = url%(state, city)
     request = urllib2.urlopen(url)
     resultstring = request.read()
     result = json.loads(resultstring)
+    print result
     if 'errors' in result:
         return render_template("error.html")
     else:
@@ -47,6 +49,7 @@ def condition(city,state):
         #get forecast
         url="http://api.wunderground.com/api/e67a9f7ffa697198/forecast/q/%s/%s.json"
         url = url%(state, city)
+        print url
         request = urllib2.urlopen(url)
         resultstring = request.read()
         result = json.loads(resultstring)
