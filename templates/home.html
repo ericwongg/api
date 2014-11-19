@@ -22,34 +22,36 @@
 
       div{
       background-color: lightgrey;
-      width: 300px;
+      width: 750px;
       padding: 25px;
-      border: 25px solid navy;
+      border: 25px solid darkcyan;
       margin: 25px;
       }
     </style>
   </head>
   <body>
     <br>
-    <br>    <center>
-      
-      <form class = "pure-form pure-form-stacked" method = "POST">
-	<fieldset>
-	  <p class = "large">
-	  <legend>Weather (alerts) in your area!(US cities only)</legend>
-	  </p>
-	  <p class = "normal">
-	  <label for = "city">City (ex. Brooklyn, San Francisco)</label>
-	  <input name = "city" type = "text" placeholder = "City">
-
-	  <label for = "state">State (ex. NY, CA)</label>
-	  <input name = "state" type = "text" placeholder = "State">
-	  <br>
-	  <br>
-	  <button type = "submit" name = "b" class = "pure-button pure-button-primary">Submit</button>
-	  </p>
-	</fieldset>
-      </form>
+    <br>    
+    <center>
+      <div>
+	<form class = "pure-form pure-form-stacked" method = "POST">
+	  <fieldset>
+	    <p class = "large">
+	      <legend>Weather in your area!<br>(US cities only)</legend>
+	    </p>
+	    <p class = "normal">
+	      <label for = "city">City (ex. Brooklyn, San Francisco)</label>
+	      <input name = "city" type = "text" placeholder = "City">
+	      
+	      <label for = "state">State (ex. NY, CA)</label>
+	      <input name = "state" type = "text" placeholder = "State">
+	      <br>
+	      <br>
+	      <button type = "submit" name = "b" class = "pure-button pure-button-primary">Submit</button>
+	    </p>
+	  </fieldset>
+	</form>
+      </div>
     </center>  
   </body>
 </html>
