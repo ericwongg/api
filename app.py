@@ -56,6 +56,12 @@ def condition(city,state):
         except:
             flash('Invalid city and state')
             return redirect(url_for('index'))
+    url = "http://api.wunderground.com/api/e67a9f7ffa697198/conditions/q/%s/%s.json"
+    url = url%(state, city)
+    request = urllib2.urlopen(url)
+    resultstring = request.read()
+    result = json.loads(resultstring)
+    temp = result['current_observation']['temperature_string']
         #we can make this even more brolic if we do scrap more data like tempertaure (lows and highs), wind, humidity
 
     #tumblr stuff
@@ -80,7 +86,7 @@ def condition(city,state):
             pass
     request.close()
 
-    return render_template("condition.html",tag=tag,pictures=pictures)
+    return render_template("condition.html",tag=tag,pictures=pictures,temp=temp)
 
 if __name__=="__main__":
     app.debug=True
