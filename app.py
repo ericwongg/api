@@ -58,7 +58,10 @@ def condition(city,state):
             return redirect(url_for('index'))
     url = "http://api.wunderground.com/api/e67a9f7ffa697198/conditions/q/%s/%s.json"
     url = url%(state, city)
-    request = urllib2.urlopen(url)
+    try:
+        request = urllib2.urlopen(url)
+    except:
+        return render_template("error.html")
     resultstring = request.read()
     result = json.loads(resultstring)
     temp = result['current_observation']['temperature_string']
@@ -72,12 +75,12 @@ def condition(city,state):
     if tag2 == "Cloudy" or tag2 == "Clear":
         tag2 = tag2 + "skies"
     url = url%(tag2)
-    print "\nURL: " + url
-    request = urllib2.urlopen(url)
+    try:
+        request = urllib2.urlopen(url)
+    except:
+        return render_template("error.html")
     resultstring = request.read()
-    print "\nRS: " + resultstring
     result = json.loads(resultstring)
-    #pictures = result['response']
     pictures = []
     for item in result['response']:
         try:
@@ -85,8 +88,12 @@ def condition(city,state):
         except:
             pass
     request.close()
-
-    return render_template("condition.html",tag=tag,pictures=pictures,temp=temp)
+    bgcolors = {'Cloudy':'darkgray', 'Partly Cloudy': 'gainsboro', 'Sunny':'yellow', 'Rain':'lightsteelblue', 'Snow':'snow', 'Clear':'lightskyblue', 'Windy':'whitesmoke', 'Thunderstorm':'gray'}
+    try:
+        color = bgcolors[tag]
+    except:
+        color = 'white'
+    return render_template("condition.html",tag=tag,pictures=pictures,temp=temp, color = color)
 
 if __name__=="__main__":
     app.debug=True
