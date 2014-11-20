@@ -32,7 +32,6 @@ def condition(city,state):
     request = urllib2.urlopen(url)
     resultstring = request.read()
     result = json.loads(resultstring)
-    print result
     if 'errors' in result:
         return render_template("error.html")
     else:
@@ -49,7 +48,6 @@ def condition(city,state):
         #get forecast
         url="http://api.wunderground.com/api/e67a9f7ffa697198/forecast/q/%s/%s.json"
         url = url%(state, city)
-        print url
         request = urllib2.urlopen(url)
         resultstring = request.read()
         result = json.loads(resultstring)
@@ -62,9 +60,16 @@ def condition(city,state):
 
     #tumblr stuff
     url="http://api.tumblr.com/v2/tagged?tag=%s&api_key=6qjbDDaQ4vUogvpFIZ2UoaHuo6ykn1vMpjRYOdYOPCQI6dBw4K"
-    url = url%(tag)
+    tag2 = tag 
+    if tag2 == "Partly Cloudy":
+        tag2 = "Cloudy"
+    if tag2 == "Cloudy" or tag2 == "Clear":
+        tag2 = tag2 + "skies"
+    url = url%(tag2)
+    print "\nURL: " + url
     request = urllib2.urlopen(url)
     resultstring = request.read()
+    print "\nRS: " + resultstring
     result = json.loads(resultstring)
     #pictures = result['response']
     pictures = []
